@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r tsconfig-paths/register -r ts-node/register  \"./src/test/**/*.ts\"",
-    "dev": "nodemon server.ts",
-    "start": "node -r ./bootstrap.js build/app.js",
+    "dev": "nodemon index.ts",
+    "start": "node -r ./bootstrap.js build/index.js",
     "lint": "eslint \"./src/**/*.ts\"",
     "build": "tsc --build tsconfig.build.json"
   },
@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "chai-http": "^4.3.0",
-    "express": "^4.18.1"
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
