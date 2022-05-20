@@ -10,7 +10,8 @@ export const handleTransfer = (req, res) => {
     .find({
       $or: [{ _id: payerId }, { _id: payeeId }],
     })
-    .then(async function (data) {
+    .clone()
+    .then(function (data) {
       const payerAccount = data[data[0]._id == payerId ? 0 : 1]
       const payeeAccount = data[data[0]._id != payerId ? 0 : 1]
 
@@ -18,12 +19,12 @@ export const handleTransfer = (req, res) => {
         return res.status(404).send('error finding account/accounts')
       }
 
-      // transfer fee can also be added here
+      // transfer fee can also be added at this point
 
       payerAccount.balance -= transferAmount
       payeeAccount.balance += transferAmount
 
-      // transfer can also be approved/rejected
+      // transfers can also be approved/rejected at this point
       const transferApproved = true
 
       if (!transferApproved) {
@@ -34,8 +35,8 @@ export const handleTransfer = (req, res) => {
 
       Account.account.collection
         .bulkWrite([
-          { updateOne: { filter: { _id: payerId }, update: payerAccount.toObject() } },
-          { updateOne: { filter: { _id: payeeId }, update: payeeAccount.toObject() } },
+          { updateOne: { 'filter': { _id: payerId }, 'update': payerAccount } },
+          { updateOne: { 'filter': { _id: payeeId }, 'update': payeeAccount } },
         ])
         .then(data => {
           return res.status(200).send({
@@ -44,7 +45,7 @@ export const handleTransfer = (req, res) => {
           })
         })
         .catch(error => {
-          return res.status(500).send('bulk operation failed')
+          return res.status(500).json('bulk operation failed')
         })
     })
     .catch(error => {

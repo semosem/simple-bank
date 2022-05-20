@@ -20,7 +20,7 @@ export const createAccount = (accountInfo: Account) => {
 }
 
 export const closeAccount = (accountId: string) => {
-  return account.remove({ _id: accountId })
+  return account.deleteOne({ _id: accountId })
 }
 
 export const deposit = (accountId: string, creditAmount: number) => {
@@ -37,22 +37,29 @@ export const deposit = (accountId: string, creditAmount: number) => {
 
 export const withdraw = (accountId, debitAmount) => {
   return new Promise((resolve, reject) => {
-    let acc = account.findOne({ _id: accountId }, (err, accountData) => {
-      if (accountData.balance - debitAmount < 0)
+    const acc = account.findOne({ _id: accountId }, (err, accountData) => {
+      if (accountData.balance - debitAmount < 0) {
         return Promise.reject(new Error('Insufficient funds'))
+      }
 
-      incrementBalance(acc, accountData, -debitAmount)
-        .then(data => resolve(data))
-        .catch(error => reject(error))
+      try {
+        const data = incrementBalance(acc, accountData, -debitAmount)
+        resolve(data)
+      } catch (error) {
+        console.log({ error })
+
+        reject(error)
+      }
     })
   })
 }
 
 const incrementBalance = (accountInstance, accountData, amount) => {
   return accountInstance
-    .update({
+    .updateOne({
       $inc: { balance: amount },
     })
+    .clone()
     .then(data =>
       Promise.resolve({
         balance: (accountData.balance += amount),

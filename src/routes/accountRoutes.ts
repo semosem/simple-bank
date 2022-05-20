@@ -54,11 +54,12 @@ export const deposit = (req, res) => {
 
 // withdraw from an account
 
-export const withdraw = (req, res) => {
-  Account.withdraw(req.body.id, req.body.debit_amount)
-    .then(data => res.send(data))
-    .catch(err => {
-      if (err.message == 'Insufficient funds') return res.status(403).send(err.message)
-      else return res.status(500).send('An unknown error occurred during the withdraw operation')
-    })
+export const withdraw = async (req, res) => {
+  try {
+    const data = await Account.withdraw(req.body.id, req.body.debit_amount)
+    res.send(data)
+  } catch (error: any) {
+    if (error.message == 'Insufficient funds') return res.status(403).send(error.message)
+    else return res.status(500).send('An unknown error occurred during the withdraw operation')
+  }
 }
