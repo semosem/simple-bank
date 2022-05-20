@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r tsconfig-paths/register -r ts-node/register  \"./src/test/**/*.ts\"",
-    "dev": "nodemon index.ts",
-    "start": "node -r ./bootstrap.js build/index.js",
+    "dev": "nodemon --trace-warnings index.ts",
+    "start": "nodemon ./bin/www",
     "lint": "eslint \"./src/**/*.ts\"",
     "build": "tsc --build tsconfig.build.json"
   },
@@ -37,6 +37,7 @@
     "mocha": "^10.0.0",
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
+    "should": "^13.2.3",
     "supertest": "^6.2.3",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^4.0.0",

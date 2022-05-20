@@ -2,35 +2,31 @@ import { Account } from '../types/Account'
 
 export const mockTestAccounts: Account[] = [
   {
-    id: 1,
     ownerName: 'Jaakko',
     lastName: 'S',
     address: '777 Main St.',
     city: 'Espoo',
-    balance: 0,
+    balance: 700,
   },
   {
-    id: 2,
     ownerName: 'Teemu',
     lastName: 'P',
     address: '1100 Blvd.',
     city: 'Addis Ababa',
-    balance: 0,
+    balance: 300,
   },
   {
-    id: 3,
-    ownerName: 'Anna',
+    ownerName: 'Sem',
     lastName: 'Ro',
     address: '45 Ita',
     city: 'Helsinki',
-    balance: 0,
+    balance: 200,
   },
   {
-    id: 4,
-    ownerName: 'Sem',
+    ownerName: 'Anna',
     lastName: 'G',
     address: '96 Viikki',
     city: 'Ababa',
-    balance: 0,
+    balance: 500,
   },
 ]
