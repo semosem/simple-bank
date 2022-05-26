@@ -49,7 +49,7 @@ Test is written inside src/test, to see all tests run
 
 ## Inspiration
 
-Implement a backend with an API for a simple bank with your chosen technologies in a way you'd setup your project normally. Required functionalities:
+Implement a backend with an API for a simple bank. Required functionalities:
 
 * create a bank account
 * transfer funds between accounts
