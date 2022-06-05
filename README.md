@@ -1,7 +1,7 @@
 # This small app is bootstrapped from scratch using a procedure here
 
     ```
-        <https://www.metachris.com/2021/04/starting-a-typescript-project-in-2021/>
+    https://www.metachris.com/2021/04/starting-a-typescript-project-in-2021
     ```
 
 ## Requirements : local develoment 
